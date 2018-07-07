@@ -9,7 +9,15 @@ class ColorizeController < ApplicationController
     # ================================================================================
 
     @original_image_url = params.fetch("image_url")
-    @colorized_image_url = "Replace this string with your answer"
+    
+    input = {
+      image: @original_image_url
+    }
+    client = Algorithmia.client('sim1+75sf4SRsiBsPmq2getcJU41')
+    algo = client.algo('deeplearning/ColorfulImageColorization/1.1.13')
+    result = algo.pipe(input).result.dig("output")
+    
+    @colorized_image_url = "https://algorithmia.com/v1/data/#{result.gsub("data://","")}"
 
     # ================================================================================
     # Your code goes above.
