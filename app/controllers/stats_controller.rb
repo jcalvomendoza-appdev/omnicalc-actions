@@ -7,36 +7,75 @@ class StatsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer"
+    @sorted_numbers = "#{@numbers.sort}"
 
-    @count = "Replace this string with your answer"
+    @count = "#{@numbers.length}"
 
-    @minimum = "Replace this string with your answer"
+    @minimum = "#{@numbers.min}"
 
-    @maximum = "Replace this string with your answer"
+    @maximum = "#{@numbers.max}"
 
-    @range = "Replace this string with your answer"
+    range = @numbers.max - @numbers.min
+    @range = "#{range}"
 
     # Median
     # ======
+    numbers = @numbers.sort
+    if numbers.length%2 == 0
+      median = (numbers[(numbers.length/2)-1]+numbers[(numbers.length/2)])/2
+    else median = numbers[(numbers.length/2)]
+    end
 
-    @median = "Replace this string with your answer"
+    @median = "#{median}"
 
-    @sum = "Replace this string with your answer"
-
-    @mean = "Replace this string with your answer"
+    sum = 0
+    @numbers.each do |num|
+      sum = sum + num
+    end
+    @sum = "#{sum}"
+    
+    mean =  mean = sum/@numbers.length
+    
+    @mean = "#{mean}"
 
     # Variance
     # ========
+  
+    squared_differences = []
+    
+    numbers.each do |num|
+    squared_difference = (num-mean)**2
+    squared_differences.push(squared_difference)
+    end
+    
+    sum_of_squared_differences = 0
+    squared_differences.each do |num|
+      sum_of_squared_differences = sum_of_squared_differences + num
+    end
+    
+    variance = (sum_of_squared_differences/squared_differences.length).round(2)
+    sd = (Math.sqrt(variance)).round(2)
 
-    @variance = "Replace this string with your answer"
+    @variance = "#{variance}"
 
-    @standard_deviation = "Replace this string with your answer"
+    @standard_deviation = "#{sd}"
 
     # Mode
     # ====
+    
+    counts = []
+    numbers.each do |num|
+      count = 0
+      numbers.each do |comp|
+        if num == comp
+          count = count +1
+        end
+      end
+      counts.push(count)
+    end
+    mode = numbers[counts.index(counts.max)]
 
-    @mode = "Replace this string with your answer"
+    @mode = "#{mode}"
 
     # ================================================================================
     # Your code goes above.

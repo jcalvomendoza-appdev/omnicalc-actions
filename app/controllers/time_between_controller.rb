@@ -11,13 +11,20 @@ class TimeBetweenController < ApplicationController
     #   So if you subtract one time from another, you will get an integer
     #   number of seconds as a result.
     # ================================================================================
-
-    @seconds = "Replace this string with your answer"
-    @minutes = "Replace this string with your answer"
-    @hours = "Replace this string with your answer"
-    @days = "Replace this string with your answer"
-    @weeks = "Replace this string with your answer"
-    @years = "Replace this string with your answer"
+    
+    seconds = (@ending-@starting).round(0)
+    minutes = (seconds/60).floor
+    hours = (minutes/60).floor
+    days = (hours/24).round(2)
+    weeks = (days/7).round(2)
+    years = (days/364).round(2)
+    
+    @seconds = "#{seconds}"
+    @minutes = "#{minutes}"
+    @hours = "#{hours}"
+    @days = "#{days}"
+    @weeks = "#{weeks}"
+    @years = "#{years}"
 
     # ================================================================================
     # Your code goes above.
