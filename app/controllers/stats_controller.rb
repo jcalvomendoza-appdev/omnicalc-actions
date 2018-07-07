@@ -53,7 +53,7 @@ class StatsController < ApplicationController
       sum_of_squared_differences = sum_of_squared_differences + num
     end
     
-    variance = (sum_of_squared_differences/squared_differences.length).round(2)
+    variance = (sum_of_squared_differences/squared_differences.length)
     sd = (Math.sqrt(variance)).round(2)
 
     @variance = "#{variance}"
